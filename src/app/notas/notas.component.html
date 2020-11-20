@@ -1,5 +1,12 @@
-<mat-list>
-    <mat-list-item>Nota 1</mat-list-item>
-    <mat-list-item>Nota 2</mat-list-item>
-    <mat-list-item>Nota 3</mat-list-item>
-</mat-list>
+<div>
+  <div class="center">
+    <input matInput type="text" [(ngModel)]="nota.nota"/>
+    <input matInput type="text" [(ngModel)]="nota.porcentaje"/>
+    <button mat-raised-button color="primary" (click)="createNota()">Agregar</button>
+  </div>
+  <div class="center">
+    <mat-list class="list" *ngFor="let nota of notas" [value]="nota">
+      <mat-list-item>{{nota.nota}}</mat-list-item>
+    </mat-list>
+  </div>
+</div>
