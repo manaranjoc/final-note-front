@@ -18,4 +18,8 @@ export class NotasService {
           data => console.log(data.headers.get('location'))
         );
   }
+
+  findAllNotes(): Observable<Nota[]> {
+    return this.http.get<Nota[]>(this.URL);
+  }
 }

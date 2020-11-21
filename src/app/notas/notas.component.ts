@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotasService } from '../notas.service';
 import { Nota } from './nota';
 import { NotaImpl } from './nota-impl';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-notas',
@@ -10,18 +11,27 @@ import { NotaImpl } from './nota-impl';
 })
 export class NotasComponent implements OnInit {
 
-  notas = ["5.0", "4.7", "10.0"]
+  notas ;
 
   nota: Nota = new NotaImpl();
 
   constructor(private readonly notaService: NotasService) { }
 
   ngOnInit(): void {
+    this.findAllNotes().subscribe(data => {
+      this.notas = data;
+    });
   }
 
   createNota(): void {
-    console.log('doing');
     this.notaService.createNota(this.nota);
+    this.findAllNotes().subscribe(data => {
+      this.notas = data;
+    });
+  }
+
+  findAllNotes(): Observable<Nota[]> {
+    return this.notaService.findAllNotes();
   }
 
 }
