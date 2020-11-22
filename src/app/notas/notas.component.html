@@ -1,7 +1,7 @@
 <div>
   <div class="center">
-    <input matInput type="text" [(ngModel)]="nota.nota"/>
-    <input matInput type="text" [(ngModel)]="nota.porcentaje"/>
+    <input matInput id="nota-input" type="text" [(ngModel)]="nota.nota"/>
+    <input matInput id="percentage-input" type="text" [(ngModel)]="nota.porcentaje"/>
     <button mat-raised-button color="primary" (click)="createNota()" id="send">Agregar</button>
   </div>
   <div class="center">

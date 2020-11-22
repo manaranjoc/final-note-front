@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 })
 export class NotasComponent implements OnInit {
 
-  notas ;
+  notas: Nota[];
 
   nota: Nota = new NotaImpl();
 
@@ -19,19 +19,37 @@ export class NotasComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllNotes().subscribe(data => {
-      this.notas = data;
+      console.log(data);
+      this.notas = data.map(
+        nota => this.convertDecimalToPercent(nota)
+      );
     });
   }
 
   createNota(): void {
-    this.notaService.createNota(this.nota);
-    this.findAllNotes().subscribe(data => {
-      this.notas = data;
-    });
+    this.notaService.createNota(
+      this.convertPercentToDecimal(this.nota)
+      );
   }
 
   findAllNotes(): Observable<Nota[]> {
     return this.notaService.findAllNotes();
+  }
+
+  convertDecimalToPercent(nota: Nota): Nota {
+    const percentageConverted = nota.porcentaje * 100;
+
+    const notaConverted: Nota = {nota: nota.nota, porcentaje: percentageConverted};
+
+    return notaConverted;
+  }
+
+  convertPercentToDecimal(nota: Nota): Nota {
+    const percentageConverted = nota.porcentaje / 100;
+
+    const notaConverted: Nota = {nota: nota.nota, porcentaje: percentageConverted};
+
+    return notaConverted;
   }
 
 }
