@@ -15,23 +15,24 @@ export class NotasComponent implements OnInit {
 
   nota: Nota = new NotaImpl();
 
+  promedio;
+
   constructor(private readonly notaService: NotasService) { }
 
   ngOnInit(): void {
-    this.findAllNotes().subscribe(data => {
-      console.log(data);
-      this.notas = data.map(
-        nota => this.convertDecimalToPercent(nota)
-      );
-    });
+    this.findAllNotes();
   }
 
   createNota(): void {
     this.notaService.createNota(
       this.convertPercentToDecimal(this.nota)
-      );
+    ).subscribe(response => this.findAllNotes());
 
-    this.findAllNotes().subscribe(data => {
+    this.nota = new NotaImpl();
+  }
+
+  findAllNotes(): void {
+    this.notaService.findAllNotes().subscribe(data => {
       console.log(data);
       this.notas = data.map(
         nota => this.convertDecimalToPercent(nota)
@@ -39,8 +40,10 @@ export class NotasComponent implements OnInit {
     });
   }
 
-  findAllNotes(): Observable<Nota[]> {
-    return this.notaService.findAllNotes();
+  getAverage(): void {
+    this.notaService.getAverage().subscribe(
+      data => this.promedio = data
+    );
   }
 
   convertDecimalToPercent(nota: Nota): Nota {
