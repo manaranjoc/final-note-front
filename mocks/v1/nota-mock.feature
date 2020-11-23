@@ -1,6 +1,6 @@
 @ignore
 Feature: stateful mock back
-# java -jar karate.jar -m my-mock.feature -m my-2nd-mock.feature -p 8080
+# java -jar karate.jar -m mocks\v1\nota-mock.feature -p 8080
 
   Background:
   * configure cors = true
