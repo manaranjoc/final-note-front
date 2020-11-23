@@ -69,5 +69,5 @@ describe('NotasComponent', () => {
 
     expect(notaResult.porcentaje).toEqual(0.2);
 
-  })
+  });
 });

@@ -30,6 +30,13 @@ export class NotasComponent implements OnInit {
     this.notaService.createNota(
       this.convertPercentToDecimal(this.nota)
       );
+
+    this.findAllNotes().subscribe(data => {
+      console.log(data);
+      this.notas = data.map(
+        nota => this.convertDecimalToPercent(nota)
+      );
+    });
   }
 
   findAllNotes(): Observable<Nota[]> {

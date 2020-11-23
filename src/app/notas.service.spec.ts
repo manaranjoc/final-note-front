@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
 import { NotasService } from './notas.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('NotasService', () => {
   let service: NotasService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientModule]
     });
     service = TestBed.inject(NotasService);
   });
@@ -16,4 +16,11 @@ describe('NotasService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should get notas', ( async () => {
+    service.findAllNotes().subscribe(
+      (response) => expect(response.length).toBeGreaterThan(0),
+      (error) => fail(error)
+    );
+  }));
 });
