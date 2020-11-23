@@ -47,3 +47,6 @@ Thumbs.db
 
 #Karate logs
 target/
+
+#Cypress videos
+cypress/videos/

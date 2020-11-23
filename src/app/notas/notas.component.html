@@ -9,4 +9,10 @@
       <mat-list-item ><div class="note">{{nota.nota}}</div></mat-list-item>
     </mat-list>
   </div>
+  <div class="center">
+    <button mat-raised-button color="primary" (click)="getAverage()" id="average">Calcular Promedio</button>
+  </div>
+  <div class="center">
+    Promedio: <span id="calc-average">{{promedio || '--'}}</span>
+  </div>
 </div>
