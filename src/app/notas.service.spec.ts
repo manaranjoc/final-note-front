@@ -1,7 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 
 import { NotasService } from './notas.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Nota } from './notas/nota';
 
 describe('NotasService', () => {
   let service: NotasService;
@@ -17,10 +18,12 @@ describe('NotasService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get notas', ( async () => {
+  it('should get notas', waitForAsync ( () => {
+
     service.findAllNotes().subscribe(
-      (response) => expect(response.length).toBeGreaterThan(0),
+      (response: Nota[]) => { expect(response.length).toBeGreaterThan(0); },
       (error) => fail(error)
     );
+
   }));
 });
